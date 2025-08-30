@@ -6,10 +6,10 @@ This project is a simple User Management API built with FastAPI and SQLAlchemy, 
 
 🚀 Features
 
-Create a new user
-Fetch user details by ID
-Update user details
-Delete a user
-PostgreSQL integration with SQLAlchemy ORM
-MongoDB integration
-Clear project structure (routes, services, models, schemas)
+* Create a new user
+* Fetch user details by ID
+* Update user details
+* Delete a user
+* PostgreSQL integration with SQLAlchemy ORM
+* MongoDB integration
+* Clear project structure (routes, services, models, schemas)
