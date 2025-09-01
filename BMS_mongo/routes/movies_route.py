@@ -13,7 +13,6 @@ def id_to_string(movie:dict) -> dict:
 @router.post("/",response_model=Movies)
 async def create_movie(movie:Movies):
     movie_dict = movie.model_dump(by_alias=True, exclude_none=True)
-    #movie_dict = movie.dict(by_alias=True)
     result = await db["movie_details"].insert_one(movie_dict)
     movie_dict["_id"] = str(result.inserted_id)
     return movie_dict
