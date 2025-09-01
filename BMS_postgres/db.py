@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
-db_url = os.getenv("DATABASE_URL")
+db_url = os.getenv("PGADMIN_DATABASE_URL")
 
 engine = create_engine(db_url)
 Session = sessionmaker(autocommit = False, autoflush=False, bind = engine)

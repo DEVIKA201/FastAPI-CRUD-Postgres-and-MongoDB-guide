@@ -1,4 +1,11 @@
 from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from dotenv import load_dotenv
 
-client = AsyncIOMotorClient("mongodb://devika:sh221b@localhost:27017/bms_db?authSource=bms_db")
-db = client.bms_db
+load_dotenv()
+
+MONGO_DATABASE_URL=os.getenv("MONGO_DATABASE_URL")
+MONGO_DB=os.getenv("MONGO_DB")
+
+client = AsyncIOMotorClient(MONGO_DATABASE_URL)
+db = client[MONGO_DB]
