@@ -6,7 +6,7 @@ from bson import ObjectId
 app= FastAPI()
 
 #Create movie
-@app.post("/movie/",response_model=Movies)
+@app.post("/movies/",response_model=Movies)
 async def create_movie(movie:Movies):
     movie_dict = movie.model_dump(by_alias=True, exclude_none=True)
     result = await db["movie_details"].insert_one(movie_dict)
@@ -25,7 +25,7 @@ async def get_movies():
     return convert_id_to_string
 
 #Fetch movies by id
-@app.get("/movie/{movie_id}",response_model=MovieUpdate)
+@app.get("/movies/{movie_id}",response_model=MovieUpdate)
 async def get_movie_by_id(movie_id:str):
     movie = await db["movie_details"].find_one({"_id":ObjectId(movie_id)})
     if not movie:
@@ -33,7 +33,7 @@ async def get_movie_by_id(movie_id:str):
     return movie
     
 #Update movie by id
-@app.put("/movie/{movie_id}",response_model=MovieUpdate)
+@app.put("/movies/{movie_id}",response_model=MovieUpdate)
 async def update_movie(movie_id:str, movie:MovieUpdate):
     update_data = movie.model_dump(by_alias=True, exclude_none=True)
     result = await db["movie_details"].update_one(
@@ -46,7 +46,7 @@ async def update_movie(movie_id:str, movie:MovieUpdate):
     return updated_movie
 
 #Delete movie by id
-@app.delete("/movie/{movie_id}")
+@app.delete("/movies/{movie_id}")
 async def delete_movie(movie:MovieDelete, movie_id:str):
     result = await db["movie_details"].update_one(
         {"_id":ObjectId(movie_id)},
