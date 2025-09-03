@@ -1,7 +1,7 @@
 from pydantic import BaseModel,Field
 from typing import Optional
 from datetime import datetime
-from models import LanguageEnum, FormatEnum, GenreEnums
+from constants.movieEnum import LanguageEnum, FormatEnum, GenreEnums
 from bson import ObjectId
 
 class Movies(BaseModel):
@@ -23,7 +23,7 @@ class Movies(BaseModel):
 class Config:
     populate_by_name = True
 
-class MovieUpdate(BaseModel):
+class MovieUpdate(Movies):
     title: Optional[str] =None
     date_of_release: Optional[datetime] = None
     duration: Optional[str] = None
@@ -39,4 +39,4 @@ class MovieUpdate(BaseModel):
     price_buy: Optional[float] = None
 
 class MovieDelete(BaseModel):
-    is_available: bool
+    message: str
