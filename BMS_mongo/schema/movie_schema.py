@@ -3,7 +3,14 @@ from typing import Optional , List
 from datetime import datetime
 from constants.movieEnum import LanguageEnum, FormatEnum, GenreEnums
 from bson import ObjectId
-from schema.artist_schema import CastCrew
+from schema import person_schema
+from schema.person_schema import CastCrew
+
+class AllMovies(BaseModel):
+    id: str = Field(None, alias="_id")
+    title: str
+    rating: str
+    language: LanguageEnum
 
 class Movies(BaseModel):
     id: Optional[str] = Field(None,alias="_id")
