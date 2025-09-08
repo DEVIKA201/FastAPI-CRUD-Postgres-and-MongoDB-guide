@@ -1,5 +1,6 @@
 from fastapi import HTTPException
-from schema import Movies, MovieDelete, MovieUpdate
+from schema.movie_schema import Movies, MovieDelete, MovieUpdate
+from schema.artist_schema import CastCrew
 from bson import ObjectId
 from db import db
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from service import create_movie_service, get_movies_services, fetch_movie_by_id, update_movie_by_id, delete_movie_by_id
-from schema import Movies, MovieDelete, MovieUpdate
+from service.movie_service import create_movie_service, get_movies_services, fetch_movie_by_id, update_movie_by_id, delete_movie_by_id
+from schema.movie_schema import Movies, MovieDelete, MovieUpdate
 from typing import List
 
 movie_router = APIRouter(tags=["movies"])
