@@ -10,22 +10,22 @@ async def create_new_artist(artist: Person):
     return await create_person(artist)
 
 #Fetch all artists
-@people_router.get("/artists/",response_model=list[Person])
+@people_router.get("/person/",response_model=list[Person])
 async def read_all_artist():
     return await get_people()
 
 #Fetch an artist
-@people_router.get("/artists/{artist_id}", response_model=Person)
+@people_router.get("/person/{artist_id}", response_model=Person)
 async def read_artist(artist_id: str):
     return await get_person_by_id(artist_id)
 
 #Update artist details
-@people_router.put("/artists/{artist_id}",response_model=UpdatePerson)
+@people_router.put("/person/{artist_id}",response_model=UpdatePerson)
 async def update_artist_by_id(artist_id:str, artist: UpdatePerson):
     return await update_person(artist_id,artist)
 
 #Soft delete artist
-@people_router.delete("/artists/{artist_id}", response_model=DeletePerson)
+@people_router.delete("/person/{artist_id}", response_model=DeletePerson)
 async def delete_artist(artist_id:str):
     return await soft_delete_person(artist_id)
     

@@ -21,6 +21,75 @@ async def get_people():
 
 #Fetch artist by id
 async def get_person_by_id(artist_id:str):
+    pipeline = [
+        {"$match":{"_id":ObjectId(artist_id)}},
+        {"$lookup":{
+            "from":"artist_details",
+            "localField": "_id",
+            "foreignField":"_id",
+            "as":"peers_info"
+        }},
+        {"$lookup":{
+            "from":"artist_details",
+            "localField":"_id",
+            "foreignField":"_id",
+            "as":"family_info"
+        }},
+        {"$project":{
+            "_id": {"$toString": "$_id"},
+            "name":1,
+            "occupation":1,
+            "also_known":1,
+            "birthplace":1,
+            "children":1,
+            "about":1,
+            "spouse":1,
+            "family":1,
+            "peers_and_more":1,
+            
+            "peers_info":{
+                "$map":{
+                    "$input": "$peers_info",
+                    "as":"person",
+                    "in":{
+                        "_id":{"$toString":"$$person.id"},
+                        "name":"$$person.name",
+                        "occupation":"$$person.occupation",
+                        "also_known":"$$also_known",
+                        "birthplace":"$$person.birthplace",
+                        "children":"$$person.children",
+                        "about":"$$person.about",
+                        "spouse":"$$person.spouse",
+                        "family":"$$person.family",
+                        "peers_and_more":"$$person.peers_and_mmore"
+                    }
+
+                }
+
+            },
+            "family_info":{
+                "$map":{
+                    "$input": "$family_info",
+                    "as":"person",
+                    "in":{
+                        "_id":{"$toString":"$$person.id"},
+                        "name":"$$person.name",
+                        "occupation":"$$person.occupation",
+                        "also_known":"$$also_known",
+                        "birthplace":"$$person.birthplace",
+                        "children":"$$person.children",
+                        "about":"$$person.about",
+                        "spouse":"$$person.spouse",
+                        "family":"$$person.family",
+                        "peers_and_more":"$$person.peers_and_mmore"
+                    }
+
+                }
+
+            }
+            
+            }}
+    ]
     person = await db["artist_details"].find_one({"_id":ObjectId(artist_id)})
     if not person:
         raise HTTPException(status_code=404, detail="Artist not found!")
