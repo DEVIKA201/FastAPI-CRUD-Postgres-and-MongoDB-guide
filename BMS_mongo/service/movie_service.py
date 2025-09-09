@@ -22,6 +22,7 @@ async def get_movies_services():
     return movies
 
 #Fetch movies by id
+#get artist details in cast and crew
 async def fetch_movie_by_id(movie_id:str):
     pipeline = [
         {"$match":{"_id":ObjectId(movie_id)}},

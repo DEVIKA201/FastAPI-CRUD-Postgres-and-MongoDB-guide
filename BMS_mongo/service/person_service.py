@@ -20,6 +20,7 @@ async def get_people():
     return convert_id_to_string 
 
 #Fetch artist by id
+#get the artist details - peers, family and more
 async def get_person_by_id(artist_id:str):
     pipeline = [
         {"$match":{"_id":ObjectId(artist_id)}},
